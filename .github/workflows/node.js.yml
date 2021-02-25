@@ -21,13 +21,14 @@ jobs:
         run: |
           npm install
           npm run build
-    needs: build
+      - uses: actions/download-artifact@main
         with:
           name: webpack artifacts
           path: public/
   
   test:
     runs-on: ubuntu-latest
+    needs: build
     strategy:
       matrix:
         os: [ubuntu-latest, windows-2016]
